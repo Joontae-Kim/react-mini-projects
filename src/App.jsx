@@ -1,51 +1,19 @@
-// App.jsx
-import { useState } from 'react';
-import './App.css';
+import { Outlet } from 'react-router-dom';
 
 function App() {
-  const [expression, setExpression] = useState('');
-
-  const handleClick = (value) => {
-    console.log('clicked:', value); // 🔍 클릭 확인용
-    if (value === 'C') return setExpression('');
-    if (value === '=') {
-      const _calculation = eval(expression).toString()
-      console.log(`   ~ _calculation => `, _calculation)
-      try {
-        setExpression(_calculation);
-      } catch {
-        // setExpression('');
-        alert('Error')
-      }
-
-      
-      return;
-    }
-    const _expression = expression + value 
-    console.log(` ~ _expression => `, _expression)
-    setExpression(_expression);
-  };
-
-  const buttons = [
-    '7','8','9','/',
-    '4','5','6','*',
-    '1','2','3','-',
-    '0','.','=','+',
-    'C'
-  ];
-
   return (
-    <div className="calculator">
-      <div className="display">
-        {expression}
-      </div>
-      <div className="buttons">
-        {buttons.map((btn, i) => (
-          <button key={i} onClick={() => handleClick(btn)}>
-            {btn}
-          </button>
-        ))}
-      </div>
+    <div>
+      <header>
+        <h1>🌐 My App</h1>
+      </header>
+
+      <main>
+        <Outlet /> {/* 여기서 하위 라우트가 렌더링됨 */}
+      </main>
+
+      <footer>
+        <small>© 2025</small>
+      </footer>
     </div>
   );
 }
